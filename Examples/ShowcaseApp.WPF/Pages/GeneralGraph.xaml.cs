@@ -38,8 +38,9 @@ namespace ShowcaseApp.WPF.Pages
             gg_Area.RelayoutFinished += gg_Area_RelayoutFinished;
             gg_Area.GenerateGraphFinished += gg_Area_GenerateGraphFinished;
             ggLogic.DefaultEdgeRoutingAlgorithm = EdgeRoutingAlgorithmTypeEnum.SimpleER;
-            ggLogic.EdgeCurvingEnabled = true;
-
+            ggLogic.EdgeCurvingEnabled = true;            
+            
+            gg_Area.ShowAllEdgesArrows(true);
 
             ZoomControl.SetViewFinderVisibility(gg_zoomctrl, Visibility.Visible);
 
@@ -134,7 +135,7 @@ namespace ShowcaseApp.WPF.Pages
             try
             {
                 gg_Area.DeserializeFromFile(dlg.FileName);
-                gg_Area.SetVerticesDrag(true);
+                gg_Area.SetVerticesDrag(true, true);
                 gg_Area.UpdateAllEdges();
                 gg_zoomctrl.ZoomToFill();
             }
@@ -276,7 +277,8 @@ namespace ShowcaseApp.WPF.Pages
 
             //supplied graph will be automaticaly be assigned to GraphArea::LogicCore.Graph property
             gg_Area.GenerateGraph(graph);
-            gg_Area.SetVerticesDrag(true);
+            gg_Area.SetVerticesDrag(true, true);
+            
 
             if (gg_Area.LogicCore.AsyncAlgorithmCompute)
                 gg_loader.Visibility = Visibility.Visible;
